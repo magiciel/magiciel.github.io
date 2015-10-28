@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0068)http://www.alunaweb.net/~andres/teaching/magiciel/labo2/Labo2_1.html -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta content="MSHTML 6.00.2900.2769" name="GENERATOR"></head>
+<body alink="#ff0000" bgcolor="#ffffff" link="#0000ef" text="#000000" vlink="#52188c">
+<blockquote>
+  <center>
+  <hr width="100%">
+  </center>
+  <p></p>
+  <center>
+  <table cols="1" nosave="" bgcolor="#ffffcc" border="2" width="60%">
+    <tbody>
+    <tr nosave="">
+      <td nosave="">
+        <center><b><font size="+3">Représentation de l'information</font></b> 
+
+        <p><b><font size="+2">Laboratoire II</font></b></p></center></td></tr></tbody></table></center>
+  <div align="right">Andres Perez-Uribe et Yanick Saugy</div>
+  <hr width="100%">
+
+  <h2>Stéganographie</h2>
+<p>
+"Si la cryptographie est l'art du secret, la stéganographie est l'art de la dissimulation" Wikipedia
+</p><p>
+L'objet de la stéganographie est de faire passer inaperçu un message 
+dans un autre message et non de le rendre inintelligible 
+(cryptographie). Une des methodes les plus courantes consiste dans 
+l'utilisation d'une image pour transporter un message "sécret". L'idée 
+est donc de prendre une image et de la modifier de manière aussi 
+discrète que possible afin d'y dissimuler l'information à transmettre. 
+La technique de base --- dite LSB pour Least Significant Bit --- 
+consiste à modifier le bit de poids faible des pixels codant l'image.</p><p>
+
+  Dans <a href="http://www.sourceforge.net/">sourceforge.net</a> (collection de logiciels Open Source) on peut trouver des logiciels, tels que <i>openstego</i>,
+ permettant la dissimulation d'un message quelconque (ça pourrait être 
+un document sensible, un exécutable ou un fichier compressé .zip) dans 
+des images PNG. Etant donné que le format PNG est un peu plus compliqué 
+que celui des images BMP, nous (enfin, Yanick) avons développé notre 
+propre logiciel <i>stego</i> de stéganographie en langage C, pour cette manip.</p><p> 
+
+  Pour utiliser <i>stego</i>, veuillez d'abord telécharger l'exécutable <a href="stego">stego</a> (bouton droit de la souris-&gt;save link as...). Pour l'exécuter, allez dans le répertoire où se trouve l'exécutable <i>stego</i> et ouvrez un terminal (clic droit -> "Open Terminal here"). Utilisez ensuite les commandes ci-dessous.
+  </p><p>
+  Pour encoder un fichier dans une image :<br>
+  </p><pre>        ./stego -e &lt;fichier a encoder&gt; &lt;image.bmp&gt; &lt;fichier bitmap de sortie&gt;
+</pre>
+<p>
+  Pour decoder une image :<br>
+  </p><pre>        ./stego -d &lt;image.bmp&gt; &lt;fichier de sortie&gt;
+</pre>
+<p>
+Vous pouvez utiliser une image simple comme <a href="test.bmp">celle ci</a> ou n'importe quelle image BMP 24-bits. Le fichier à encoder peut être une autre image, un fichier texte, etc.</p><p>
+Une image bitmap BMP 24bits commence avec un entête ou "header" et 
+ensuite, on trouve la couleur des pixels de l'image. L'entête commence 
+avec les caractères 'B' et 'M' en ASCII. Le 11ème byte contient la 
+taille de l'entête en hexadécimal, ou l'octet du fichier BMP où l'image 
+telle quelle est codée (suppossant qu'on commence à numéroter les octets
+ par l'octet zéro). Notre version du programme <i>stego</i> stocke 
+d'abord la taille du message à dissimuler (il s'agit d'un nombre naturel
+ codé sur 32 bits) en modifient les bites LSB des 32 bytes à partir de 
+la fin de l'entête. C'est à partir de là qu'on dissimule le message <b>secret</b> en utilisant la technique LSB de stéganographie.
+</p><p>
+<b>Réference:</b> Wikipedia, sourceforge
+<br> 
+</p><hr>
+HEIG-VD, 2010 
+</blockquote></body></html>

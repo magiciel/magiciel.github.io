@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0056)http://www.alunaweb.net/~andres/teaching/magiciel/labo2/ -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta content="MSHTML 6.00.2900.2769" name="GENERATOR"></head>
+<body alink="#ff0000" bgcolor="#ffffff" link="#0000ef" text="#000000" vlink="#52188c">
+<blockquote>
+  <center>
+  <hr width="100%">
+  </center>
+  <p></p>
+  <center>
+  <table cols="1" nosave="" bgcolor="#ffffcc" border="2" width="60%">
+    <tbody>
+    <tr nosave="">
+      <td nosave="">
+        <center><b><font size="+3">Représentation de l'information</font></b> 
+
+        <p><b><font size="+2">Laboratoire II</font></b></p></center></td></tr></tbody></table></center><br>
+  <div align="right">Prof. Andres Perez-Uribe</div>
+  <hr width="100%">
+
+
+  <h2>I. Objectif</h2>Découvrir la manière dont les ordinateurs codent et 
+  stockent les informations du monde réel. 
+  <h2>II. Introduction:</h2>Que vous écriviez un article, modifiez une image, 
+  construisiez une page web, écoutiez un morceau de musique ou regardiez un film 
+  sur votre ordinateur, vous avez à faire à des fichiers. Pour que ces fichiers 
+  puissent être ouverts, lus ou modifiés par vos logiciels préférés, il faut 
+  qu'ils aient un format. Un format est ce qui permet à un logiciel 
+  d'interpréter les données brutes d'un fichier. C'est, autrement dit, le mode 
+  de représentation de ces données. Souvent, les formats des fichiers sont 
+  indiqués par leur extension : le suffixe (souvent trois lettres) attaché au 
+  nom de fichier. Par exemple : mapageweb.htm est un fichier en format HTML. Il 
+  existe des formats spécifiques pour les images (par exemple JPEG, PNG, GIF, 
+  TIF, BMP), pour les textes sans mise en forme (ASCII, souvent indiqué comme 
+  TXT), pour les textes avec mise en forme (HTML, RTF, DOC), pour les pages 
+  prêtes à l'impression (PDF, PS) etc.
+  <p></p><b>Formats ouverts contre formats propriétaires:</b> 
+  <p></p>Afin de travailler avec un fichier, vous aurez besoin la plupart du 
+  temps d'un logiciel qui vous permette de lire, modifier ou enregistrer les 
+  données de ce fichier. 
+  <p></p><b>Formats ouverts:</b> <br>On dira que le format d'un fichier est 
+  ouvert si le mode de représentation de ses données est transparent et/ou sa 
+  spécification appartient au domaine public. Il s'agit principalement de 
+  standards établis par des autorités publiques ou des institutions 
+  internationales, dont le but est de fixer des normes assurant 
+  l'interopérabilité entre logiciels. Il existe pourtant plusieurs cas de 
+  formats ouverts promus par des entreprises ayant décidé de rendre publique la 
+  spécification de leurs formats. 
+  <p></p><b>Formats propriétaires:</b> <br>On dira qu'un format est 
+propriétaire 
+  si le mode de représentation de ses données est opaque et sa 
+spécification 
+  n'appartient pas au domaine public. Il s'agit de formats devéloppés 
+par des 
+  entreprises afin de coder les données d'une application qu'elle 
+produit: seuls 
+  les logiciels produits par cette entreprise seront capables de lire 
+  correctement et complètement les données contenues dans un fichier à 
+format 
+  propriétaire. Les formats propriétaires peuvent être légalement 
+protégés par des brevets et imposer le versement de royalties à tous 
+ceux qui les 
+  utilisent. 
+<p></p>
+
+
+  <h2>III. Explorer les différentes formes de représentation de l'information dans un ordinateur:</h2>
+  <ul>
+    <li><a href="Labo1_1.html" target="_blank">Le codage des fichiers</a>
+    <p>
+    </p><ul>Exercices:
+      <p>1. Visualiser cette exécutable avec wxHexEditor <a href="Labo2_files/Printkey.exe" target="_blank">fichierexe</a> (bouton droit de la souris-&gt;save link as...) <br>2. Visualiser ce fichier texte avec wxHexEditor <a href="Labo2_files/texte.txt" target="_blank">fichiertxt</a> (bouton droit de la souris-&gt;save link as...)</p></ul>
+    </li><li><a href="Labo1_3.html" target="_blank">Les images</a>
+    <p>
+    </p><ul>Exercices:
+      <p>
+      <p></p><table border="0">
+        <tbody>
+        <tr>
+          
+          <td><a href="Labo2_files/marche.bmp" target="_blank"><img src="Labo2_files/marche.gif" width="200"></a></td>
+          <td>Clicker sur l'image, puis enregistrez la dans votre répertoire de 
+            travail (bouton droit de la souris-&gt;save link as...)</td></tr></tbody></table>
+
+<br>1. Ouvrez l'image avec Gimp (clic droit -> Open with Gimp Image Editor) et changez le 
+      nombre maximum de couleurs de l'image à l'aide de la fonction qu'on trouve dans le 
+      menu Image->Mode->Indexed. Observez la perte de qualité de l'image.
+
+<br>2. Sauvez l'image 
+      (File->Export as...) en format BMP avec des nouveaux noms en utilisant 16 et 2 couleurs. 
+      Observez la taille des fichiers.
+
+<br>3. Ouvrez l'image originale avec 
+      Gimp et utilisez le menu Image->Scale Image. 
+      Diminuez de moitié la taille de l'image. Diminuez de moitié encore une 
+      fois. Maintenant, doublez la taille de l'image et observez la perte de 
+      qualité. Doublez encore une fois pour retrouver la taille de l'image 
+      originale.
+
+<br>4. Ouvrez l'image avec wxHexEditor. Remplacez plusieurs 
+      lignes (au moins 20) par la valeurs FF, environ au milieu du fichier. Puis enregistrez 
+      et ouvrez cette image. Que constatez-vous?! 
+
+</p><p>5. Le fichier <a href="lena_std.tiff">lena_std.tiff</a> est une image de Lena en format TIFF et le fichier <a href="lena_badfile.tiff">lena_badfile.tiff</a>
+ est une image TIFF comportant une erreur de format. Essayez de visualiser l'image
+ en double-cliquant par exemple, et ensuite, avec wxHexEditor afin de 
+découvrir l'erreur de format.
+	  
+</p><p>6. <a href="Labo1_5.html" target="_blank">Stéganographie</a>
+</p><p>
+L'image bitmap ci-dessous, contient un message ASCII dissimulé. Trouvez le message et indiquez où il se trouve.</p><p>
+	  </p><center>
+	  <img src="Labo2_files/image.bmp">
+	  </center>	  
+	  
+	  <p></p>
+<p>7. Postscript vs GIF et autres.</p><p>
+
+Le code ci-dessous dessine une ligne droite en langage Postscript. 
+Copiez ces lignes sur un ficher texte et sauvez-le avec un nom et 
+l'extension <br>ps<br>.</p><p>
+
+</p><pre>%% Draws a line
+
+/inch {72 mul} def     
+newpath
+4 inch 1 inch moveto 
+1 inch 4 inch lineto
+closepath
+stroke                  
+showpage
+</pre>
+
+Ouvrez le fichier ps et "zoomez" pour vérifier que la qualité de la ligne droite ne se détériore. Maintenant, copiez la version <a href="Labo2_3_files/line.gif">GIF</a> de la même image et faite la même chose qu'avec le fichier ps. Que constatez-vous?!
+
+	  <p></p>
+
+	<p></p></ul>
+    <p></p>
+    </li><li><a href="Labo1_4.html" target="_blank">Les documents</a>
+    <p>
+    </p><ul>Exercices:
+      <p>1. Langage de balisage pour écrire des pages Web</p><p>
+      
+      Enregistrez sur votre disque la page HTML suivante : <a href="Labo2_files/exemple.html" target="_blank">exemple</a> (bouton droit de la souris-&gt;Save link as...). <br>Puis ouvrez le avec gedit (clic droit -> "Open With gedit") pour l'editer:<br><br>1. 
+      Rajouter la balise &lt;html&gt; au début du fichier pour indiquer qu'il 
+      s'agit d'un document formaté en HTML. <br>2. Rajouter la balise &lt;h1&gt; 
+      avant le titre du document et &lt;/h1&gt; à la fin du titre. <br>3. Sauver 
+      et cliker sur le fichier exemple.html pour visualiser la page html en 
+      construction. <br>4. Rajouter la balise &lt;center&gt; avant la balise 
+      &lt;h1&gt; et la balise &lt;/center&gt; après la balise &lt;/h1&gt;. 
+      <br>5. Sauver et cliker sur le fichier exemple.html pour visualiser la 
+      page html en construction. <br>6. Rajouter la balise &lt;h2&gt; avant le 
+      mot Introduction et la balise &lt;/h2&gt; après ce mot pour définir sa 
+      taille. <br>7. Sauver et cliker sur le fichier exemple.html pour 
+      visualiser la page html en construction. <br>8. Rajouter la balise 
+      &lt;h2&gt; avant Section 1 et la balise &lt;/h2&gt; après. <br>9. Rajouter 
+      les balises &lt;h3&gt; et &lt;/h3&gt; aux Sous-sections 1.1 et 1.2 pour 
+      définir leur tailles. <br>10. Rajouter la balise &lt;b&gt; avant le mot 
+      HTML et &lt;/b&gt; à la fin de ce mot pour le mettre en <b>gras</b>. 
+      <br>11. Rajouter la balise &lt;i&gt; avant World Wide Web et &lt;/i&gt; 
+      après pour le mettre en <i>italique</i>. <br>12. Rajouter &lt;a 
+      href="http://fr.wikipedia.org/wiki/Serveur_Web"&gt; avant le mot serveur 
+      et &lt;/a&gt; après, pour créer un lien vers une page html hébergée dans 
+      une autre machine. <br>13. Rajouter la balise &lt;hr&gt; pour dessiner une 
+      ligne à la fin du document. <br>14. Rajouter &lt;img 
+      src="http://www.heig-vd.ch/docs/default-source/presse-logos/heig-vd_logo_couleur_format_jpg.jpg"&gt; pour 
+      introduire une image dans votre page html. <br>15. Rajouter la balise 
+      &lt;/html&gt; pour indiquer la fin du code HTML. </p></ul></li>
+      <ul>
+      <p><b>2. Langage de balisage pour Google Earth</b></p><p> 
+      
+      Une évolution des langages de balisage est la définition du langage de balisage 
+      générique XML (Extensible Markup Language) ou langage de balisage extensible.
+      Un exemple de langage basé sur ce formaliste  est le langage 
+      <a href="http://en.wikipedia.org/wiki/Keyhole_Markup_Language">KML</a> (Keyhole Markup Language)
+      destiné à la gestion de l'affichage de données géospatiales dans des logiciels 
+      comme Google Earth et Google Maps.</p><p>
+
+         1. Enregistrez sur votre disque le fichier KML suivant : <a href="Labo2_files/exemple_position.kml" target="_blank">exemple_position.kml</a> (bouton droit de la souris-&gt;save link as...). Puis, ouvrez-le avec gedit (clic droit -> Open With gedit).
+      </p><p>2. Ouvrez la page <a href="http://display-kml.appspot.com/" target="_blank">http://display-kml.appspot.com/</a> dans votre navigateur
+      </p><p>3. Copiez-collez le contenu du fichier KML depuis gedit dans le panel sous "Type your KML here"
+      </p><p>4. Cliquez sur "Show it on the map!"
+      </p><p>5. Trouvez les coordonnées (longitude, latitude) d'un endroit qui vous intéresse (par exemple, là où vous habitez) 
+      en utilisant par exemple Google Maps.
+
+      </p><p>6. Modifiez les coordonnées (et le texte à afficher) dans le KML.
+
+      </p><p>7. Cliquez à nouveau sur "Show it on the map!"</p><p>
+      </p></ul>
+
+      
+          <li><a href="Labo1_2.html" target="_blank">La musique, les sons</a>
+    <p>
+   
+  </p><hr width="100%">
+  
+
+  <h2>Sources:</h2><a href="http://www.octopussy-world.com/" target="_blank">http://www.octopussy-world.com/</a> <br><a href="http://www.ac-poitiers.fr/math/tex/" target="_blank">http://www.ac-poitiers.fr/math/tex/</a> <br><a href="http://www.openformats.org/fr" target="_blank">http://www.openformats.org/fr</a> 
+  <p></p>
+<hr>
+HEIG-VD, 2010 
+</li></ul></blockquote></body></html>
