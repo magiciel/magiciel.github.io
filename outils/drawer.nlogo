@@ -33,7 +33,7 @@ CHOOSER
 100
 pen_color
 pen_color
-"gray" "red" "orange" "brown" "yellow" "green" "lime" "turquoise" "cyan" "sky" "blue" "violet" "magenta" "pink"
+"black" "gray" "white" "red" "orange" "brown" "yellow" "green" "lime" "turquoise" "cyan" "sky" "blue" "violet" "magenta" "pink"
 1
 
 BUTTON
@@ -42,7 +42,7 @@ BUTTON
 88
 240
 Draw
-if mouse-down? [\n  ask patch mouse-xcor mouse-ycor [\n    set pcolor ((read-from-string pen_color) + brightness)\n  ]\n]
+if mouse-down? [\n  ask patch mouse-xcor mouse-ycor [\n    ifelse ( (pen_color = \"black\") or (pen_color = \"white\") )\n    [ set pcolor (read-from-string pen_color) ]\n    [ set pcolor ((read-from-string pen_color) + brightness) ]\n  ]\n]
 T
 1
 T
@@ -56,14 +56,14 @@ NIL
 SLIDER
 20
 125
-190
+192
 158
 brightness
 brightness
--5
-4.9
+-4
+4
 0
-0.1
+1
 1
 NIL
 HORIZONTAL
@@ -411,7 +411,7 @@ Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 
 @#$#@#$#@
-NetLogo 5.2.1
+NetLogo 5.2.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
