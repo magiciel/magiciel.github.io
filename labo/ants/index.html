@@ -23,16 +23,21 @@
         <center><b><font size="+3">Fourmis en Netlogo</font></b> 
 
         <p><b><font size="+2">Laboratoire IV</font></b></p></center></td></tr></tbody></table></center><br>
-  <div align="right">Prof. Hector Satizabal</div>
+  <div align="right"><p>Hector Satizabal<br />Julien Rebetez</p></div>
   <hr width="100%">
-
-
-  <h2>I. Objectifs à évaluer</h2>
+ 
+  <h2>I. Critères d'évaluation</h2>
+  <p>Envoyez le fichier <b>.nlogo</b> (pas de fichier texte ou de document word !) par email à <a href="mailto:julien.rebetez@heig-vd.ch">julien.rebetez@heig-vd.ch</a>.</p>
   <ul>
-    <li> Les instructions if et ifelse
-    <li> Les variables globales
-    <li> Les variables locales
-    <li> Les variables d'etat
+    <li>Pas d'erreur de syntaxe</li>
+    <li>Une procédure pour initialiser l'environnement (carrés + fourmis)</li>
+    <li>La procédure pour dessiner les carrés doit accepter deux paramètres : taille et couleur du carré</li>
+    <li>Utilisation d'une boucle <b>while</b> pour la boucle principale</li>
+    <li>Utilisation d'une variable globale pour compter la quantité de nourriture dans le nid</li>
+    <li>Utilisation d'une variable d'état pour mémoriser qu'une fourmi est chargée</li>
+    <li>Déplacement aléatoire (pas de sauts, pas de cercles, utiliser <b>fd 1</b>)</li>
+    <li>Utilisation de bouton(s) pour initialiser l'environnement et lancer la simulation</li>
+    <li>Respecter les indications ci-dessous</li>
   </ul>
   
   <h2>II. Exercice</h2>
@@ -41,7 +46,7 @@
     <p><img src="ants20.png" height="315" width="315"></p>
     <li> <b>Nourriture</b>: Écrire une procédure pour que une des fourmis dessine un carré jaune de 5x5 patches à un endroit aléatoire de l'environnement
     <p><img src="ants20_food_clip.png" height="250" width="270"></p>
-    <li> <b>Nid</b>: Écrire une procédure pour que une des fourmis dessine un carré bleu de 2x2 patches à un endroit aléatoire de l'environnement
+    <li> <b>Nid</b>: Écrire une procédure pour que une des fourmis dessine un carré bleu de 3x3 patches à un endroit aléatoire de l'environnement
     <p><img src="ants20_food_nest_clip.png" height="250" width="270"></p>
     <li> Écrire un programme qui fait bouger aléatoirement une vingtaine de fourmis à la recherche de nourriture (patches jaunes):
       <ul>
