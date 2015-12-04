@@ -24,17 +24,22 @@ to init
   reset-ticks
 end
 
-to avancer
+to avancer_moutons
+  fd 1
+  rt (random 90) - 45
+end
+
+to avancer_loups
   fd 1
   rt (random 90) - 45
 end
 
 to vie_de_moutons
-  avancer
+  avancer_moutons
 end
 
 to vie_de_loups
-  avancer
+  avancer_loups
   let proie one-of moutons-here
   if (proie != nobody)
   [ ask proie [die]
