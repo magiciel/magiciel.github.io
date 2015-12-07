@@ -1,6 +1,8 @@
 breed [moutons mouton]
 breed [loups loup]
 
+loups-own [energie]
+
 to init_mouton
   set shape "sheep"
   set color white
@@ -15,6 +17,7 @@ to init_loup
   set shape "wolf"
   set color yellow
   setxy (random 32) (random 32)
+  set energie 50
 end
 
 to init_loups
@@ -36,6 +39,19 @@ end
 to avancer_loups
   fd 1
   rt (random 90) - 45
+  set energie (energie - 0.1)         ; dépenser de l'énergie
+end
+
+to manger [q_e]
+  set pcolor black
+  set energie (energie + q_e)
+  if (energie > 100)
+  [ set energie 100
+  ]
+end
+
+to mourir
+  die
 end
 
 to vie_de_moutons
@@ -44,14 +60,21 @@ end
 
 to vie_de_loups
   avancer_loups
-  let proie one-of moutons-here      ; prendre un des moutons qui se trouve à la même place
-  if (proie != nobody)               ; verifier qu'il y avait un mouton à la même place
-  [ ask proie [die]                  ; tuer le mouton
+  ifelse (energie <= 0)               ; si le loup n'a plus d'énergie
+  [ mourir                            ; mourir
+  ]
+  [ if (energie < 75)                 ; si le mouton a faim
+    [ let proie one-of moutons-here   ; prendre un des moutons qui se trouve à la même place
+      if (proie != nobody)            ; verifier qu'il y avait un mouton à la même place
+      [ ask proie [die]               ; tuer le mouton
+        manger 50                     ; manger le mouton
+      ]
+    ]
   ]
 end
 
 to main
-  while [count moutons > 0]
+  while [(count moutons > 0) and (count loups > 0)]
   [ ask moutons [vie_de_moutons]
     ask loups [vie_de_loups]
     tick

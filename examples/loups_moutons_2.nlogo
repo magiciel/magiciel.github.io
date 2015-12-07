@@ -1,10 +1,14 @@
 breed [moutons mouton]
 breed [loups loup]
 
+moutons-own [energie]
+loups-own [energie]
+
 to init_mouton
   set shape "sheep"
   set color white
   setxy (random 32) (random 32)
+  set energie 50
 end
 
 to init_moutons
@@ -15,6 +19,7 @@ to init_loup
   set shape "wolf"
   set color yellow
   setxy (random 32) (random 32)
+  set energie 50
 end
 
 to init_loups
@@ -31,28 +36,65 @@ end
 to avancer_moutons
   fd 1
   rt (random 90) - 45
+  set energie (energie - 0.1)         ; dépenser de l'énergie
 end
 
 to avancer_loups
   fd 1
   rt (random 90) - 45
+  set energie (energie - 0.1)         ; dépenser de l'énergie
+end
+
+to manger [q_e]
+  set pcolor black
+  set energie (energie + q_e)
+  if (energie > 100)
+  [ set energie 100
+  ]
+end
+
+to mourir
+  die
 end
 
 to vie_de_moutons
   avancer_moutons
+  ifelse (energie <= 0)               ; si le mouton n'a plus d'énergie
+  [ mourir                            ; mourir
+  ]
+  [ if (pcolor = green)               ; si le mouton trouve de l'herbe
+    [ manger 2                        ; manger l'herbe
+    ]
+  ]
 end
 
 to vie_de_loups
   avancer_loups
-  let proie one-of moutons-here      ; prendre un des moutons qui se trouve à la même place
-  if (proie != nobody)               ; verifier qu'il y avait un mouton à la même place
-  [ ask proie [die]                  ; tuer le mouton
+  ifelse (energie <= 0)               ; si le loup n'a plus d'énergie
+  [ die                               ; mourir
+  ]
+  [ if (energie < 75)                 ; si le mouton a faim
+    [ let proie one-of moutons-here   ; prendre un des moutons qui se trouve à la même place
+      if (proie != nobody)            ; verifier qu'il y avait un mouton à la même place
+      [ ask proie [mourir]            ; tuer le mouton
+        manger 50                     ; manger le mouton
+      ]
+    ]
+  ]
+end
+
+to pousser
+  if ((ticks mod 200) = 0)             ; executer toute les 200 iterations
+  [ if ((random 100) < 2)              ; lancer le dé
+    [ set pcolor green                 ; faire pousser l'herbe
+    ]
   ]
 end
 
 to main
-  while [count moutons > 0]
-  [ ask moutons [vie_de_moutons]
+  while [(count moutons > 0) and (count loups > 0)]
+  [ ask patches [pousser]
+    ask moutons [vie_de_moutons]
     ask loups [vie_de_loups]
     tick
   ]
@@ -102,7 +144,8 @@ true
 "" ""
 PENS
 "loups" 1.0 0 -5825686 true "" "plot count loups"
-"moutons" 1.0 0 -13840069 true "" "plot count moutons"
+"moutons" 1.0 0 -13345367 true "" "plot count moutons"
+"herbe" 1.0 0 -13840069 true "" "plot count patches with [pcolor = green]"
 
 BUTTON
 53
