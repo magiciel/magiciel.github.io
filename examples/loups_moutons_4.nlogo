@@ -79,8 +79,8 @@ to vie_de_moutons
       [ manger 50                     ; manger la fleur
       ]
     ]
-    let partner one-of moutons-here   ; choisir un partenaire
-    if (partner != self)          ; si un partenaire a été trouvé
+    let partner one-of other moutons-here    ; choisir un partenaire
+    if (partner != nobody)            ; si un partenaire a été trouvé
     [ if (random 100 < 50)            ; lancer le dé
       [ if ((energie > 70) and ([energie] of partner > 70))
         [ hatch 1 [init_mouton]       ; créer un nouveau mouton
@@ -104,8 +104,8 @@ to vie_de_loups
         manger 50                     ; manger le mouton
       ]
     ]
-    let partner one-of loups-here     ; choisir un partenaire
-    if (partner != self)              ; si un partenaire a été trouvé
+    let partner one-of other loups-here    ; choisir un partenaire
+    if (partner != nobody)            ; si un partenaire a été trouvé
     [ if (random 100 < 50)            ; lancer le dé
       [ if ((energie > 70) and ([energie] of partner > 70))
         [ hatch 1 [init_loup]         ; créer un nouveau loup
