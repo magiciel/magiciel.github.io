@@ -1,5 +1,6 @@
 breed [moutons mouton]
 breed [loups loup]
+breed [fleurs fleur]
 
 moutons-own [energie]
 loups-own [energie]
@@ -8,7 +9,7 @@ patches-own [tick_fleur]
 to init_mouton
   set shape "sheep"
   set color white
-  setxy (random 32) (random 32)
+  setxy (10 + random 5) (10 + random 5)
   set energie 50
 end
 
@@ -19,12 +20,17 @@ end
 to init_loup
   set shape "wolf"
   set color yellow
-  setxy (random 32) (random 32)
+  setxy (-1 * random 16) (-1 * random 16)
   set energie 50
 end
 
 to init_loups
   create-loups 5 [ init_loup ]
+end
+
+to init_fleur
+  set shape "flower"
+  set color pink
 end
 
 to init_patches
@@ -39,22 +45,57 @@ to init
   reset-ticks
 end
 
+to tourner_a_droite_max [angle max_angle]
+    ifelse abs angle > max_angle
+    [ ifelse angle > 0
+      [ rt max_angle ]
+      [ lt max_angle ]
+    ]
+    [ rt angle ]
+end
+
+to se_orienter_comme_des_moutons
+  let copains other moutons in-radius 10                                  ; trouver les moutons les plus proches
+  if (any? copains)                                                       ; si il y a des moutons en proximité
+  [ let copain_le_plus_proche min-one-of copains [distance myself]        ; trouver le mouton le plus proche
+    ifelse (distance copain_le_plus_proche < 1)                           ; regarder si on est trop proche
+    [ let a subtract-headings heading [heading] of copain_le_plus_proche  ; s'eloigner
+      tourner_a_droite_max a 1
+    ]
+    [ let x sum [dx] of copains                                           ; s'orienter comme les autres
+      let y sum [dy] of copains
+      if ((x != 0) or (y != 0))
+      [ let a subtract-headings (atan x y) heading
+        tourner_a_droite_max a 15
+      ]
+      
+      set x mean [sin (towards myself + 180)] of copains                  ; s'orienter vers le centre du groupe
+      set y mean [cos (towards myself + 180)] of copains
+      if ((x != 0) or (y != 0))
+      [ let a subtract-headings (atan x y) heading
+        tourner_a_droite_max a 10
+      ]
+    ]
+  ]
+  rt (random 10) - 5                      ; tourner un peu au hasard
+end
+
 to avancer_moutons
+  se_orienter_comme_des_moutons
   fd 1
-  rt (random 90) - 45
-  set energie (energie - 0.1)         ; dépenser de l'énergie
+  set energie (energie - 0.1)             ; dépenser de l'énergie
 end
 
 to avancer_loups
-  fd 1
   rt (random 90) - 45
-  set energie (energie - 0.1)         ; dépenser de l'énergie
+  fd 1
+  set energie (energie - 0.1)             ; dépenser de l'énergie
 end
 
 to manger [q_e]
-  set pcolor black                    ; manger
+  set pcolor black                        ; manger
   set energie (energie + q_e)
-  if (energie > 100)                  ; vérifier la limite d'énergie
+  if (energie > 100)                      ; vérifier la limite d'énergie
   [ set energie 100
   ]
 end
@@ -66,15 +107,26 @@ end
 
 to vie_de_moutons
   avancer_moutons
-  ifelse (energie <= 0)               ; si le mouton n'a plus d'énergie
-  [ mourir                            ; mourir
+  ifelse (energie <= 0)                   ; si le mouton n'a plus d'énergie
+  [ mourir                                ; mourir
   ]
-  [ ifelse (pcolor = green)           ; si le mouton trouve de l'herbe
-    [ set pcolor black                ; manger l'herbe
+  [ if (pcolor = green)                   ; si le mouton trouve de l'herbe
+    [ set pcolor black                    ; manger l'herbe
       manger 2
     ]
-    [ if (pcolor = pink)              ; si le mouton trouve une fleur
-      [ manger 50                     ; manger la fleur
+    let bourgeon one-of fleurs-here
+    if (bourgeon != nobody)               ; si le mouton trouve une fleur
+    [ ask bourgeon [die]
+      manger 50                           ; manger la fleur
+    ]
+    let partner one-of other moutons-here ; choisir un partenaire
+    if (partner != nobody)                ; si un partenaire a été trouvé
+    [ if (random 100 < 50)                ; lancer le dé
+      [ if ((energie > 70) and ([energie] of partner > 70))
+        [ hatch 1 [init_mouton]           ; créer un nouveau mouton
+          set energie (energie - 20)
+          ask partner [set energie (energie - 20)]
+        ]
       ]
     ]
   ]
@@ -82,28 +134,38 @@ end
 
 to vie_de_loups
   avancer_loups
-  ifelse (energie <= 0)               ; si le loup n'a plus d'énergie
-  [ mourir                            ; mourir
+  ifelse (energie <= 0)                   ; si le loup n'a plus d'énergie
+  [ mourir                                ; mourir
   ]
-  [ if (energie < 75)                 ; si le mouton a faim
-    [ let proie one-of moutons-here   ; prendre un des moutons qui se trouve à la même place
-      if (proie != nobody)            ; verifier qu'il y avait un mouton à la même place
-      [ ask proie [mourir]            ; tuer le mouton
-        manger 50                     ; manger le mouton
+  [ if (energie < 75)                     ; si le mouton a faim
+    [ let proie one-of moutons-here       ; prendre un des moutons qui se trouve à la même place
+      if (proie != nobody)                ; verifier qu'il y avait un mouton à la même place
+      [ ask proie [mourir]                ; tuer le mouton
+        manger 50                         ; manger le mouton
+      ]
+    ]
+    let partner one-of other loups-here   ; choisir un partenaire
+    if (partner != nobody)                ; si un partenaire a été trouvé
+    [ if (random 100 < 50)                ; lancer le dé
+      [ if ((energie > 70) and ([energie] of partner > 70))
+        [ hatch 1 [init_loup]             ; créer un nouveau loup
+          set energie (energie - 20)
+          ask partner [set energie (energie - 20)]
+        ]
       ]
     ]
   ]
 end
 
 to pousser
-  if ((ticks mod 200) = 0)             ; executer toute les 200 iterations
-  [ if ((random 100) < 2)              ; lancer le dé
-    [ set pcolor green                 ; faire pousser l'herbe
+  if ((ticks mod 200) = 0)                 ; executer toute les 200 iterations
+  [ if ((random 100) < 2)                  ; lancer le dé
+    [ set pcolor green                     ; faire pousser l'herbe
     ]
   ]
-  if (ticks = tick_fleur)              ; c'est le moment de faire pousser la fleur
-  [ set pcolor pink
-    set tick_fleur -1                  ; enlever la marque
+  if (ticks = tick_fleur)                  ; c'est le moment de faire pousser la fleur
+  [ sprout-fleurs 1 [init_fleur]           ; créer une fleur
+    set tick_fleur -1                      ; enlever la marque
   ]
 end
 

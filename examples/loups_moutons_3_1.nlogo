@@ -1,5 +1,6 @@
 breed [moutons mouton]
 breed [loups loup]
+breed [fleurs fleur]
 
 moutons-own [energie]
 loups-own [energie]
@@ -25,6 +26,11 @@ end
 
 to init_loups
   create-loups 5 [ init_loup ]
+end
+
+to init_fleur
+  set shape "flower"
+  set color pink
 end
 
 to init_patches
@@ -69,13 +75,14 @@ to vie_de_moutons
   ifelse (energie <= 0)               ; si le mouton n'a plus d'énergie
   [ mourir                            ; mourir
   ]
-  [ ifelse (pcolor = green)           ; si le mouton trouve de l'herbe
+  [ if (pcolor = green)               ; si le mouton trouve de l'herbe
     [ set pcolor black                ; manger l'herbe
       manger 2
     ]
-    [ if (pcolor = pink)              ; si le mouton trouve une fleur
-      [ manger 50                     ; manger la fleur
-      ]
+    let bourgeon one-of fleurs-here
+    if (bourgeon != nobody)           ; si le mouton trouve une fleur
+    [ ask bourgeon [die]
+      manger 50                       ; manger la fleur
     ]
   ]
 end
@@ -102,7 +109,7 @@ to pousser
     ]
   ]
   if (ticks = tick_fleur)              ; c'est le moment de faire pousser la fleur
-  [ set pcolor pink
+  [ sprout-fleurs 1 [init_fleur]       ; créer une fleur
     set tick_fleur -1                  ; enlever la marque
   ]
 end

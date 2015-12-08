@@ -1,5 +1,6 @@
 breed [moutons mouton]
 breed [loups loup]
+breed [fleurs fleur]
 
 moutons-own [energie]
 loups-own [energie]
@@ -27,10 +28,13 @@ to init_loups
   create-loups 5 [ init_loup ]
 end
 
+to init_fleur
+  set shape "flower"
+  set color pink
+end
+
 to init_patches
-  ask patches
-  [ set tick_fleur -1
-  ]
+  ask patches [ set tick_fleur -1 ]
 end
 
 to init
@@ -44,19 +48,19 @@ end
 to avancer_moutons
   fd 1
   rt (random 90) - 45
-  set energie (energie - 0.1)         ; dépenser de l'énergie
+  set energie (energie - 0.1)            ; dépenser de l'énergie
 end
 
 to avancer_loups
   fd 1
   rt (random 90) - 45
-  set energie (energie - 0.1)         ; dépenser de l'énergie
+  set energie (energie - 0.1)            ; dépenser de l'énergie
 end
 
 to manger [q_e]
-  set pcolor black                    ; manger
+  set pcolor black                       ; manger
   set energie (energie + q_e)
-  if (energie > 100)                  ; vérifier la limite d'énergie
+  if (energie > 100)                     ; vérifier la limite d'énergie
   [ set energie 100
   ]
 end
@@ -68,22 +72,23 @@ end
 
 to vie_de_moutons
   avancer_moutons
-  ifelse (energie <= 0)               ; si le mouton n'a plus d'énergie
-  [ mourir                            ; mourir
+  ifelse (energie <= 0)                   ; si le mouton n'a plus d'énergie
+  [ mourir                                ; mourir
   ]
-  [ ifelse (pcolor = green)           ; si le mouton trouve de l'herbe
-    [ set pcolor black                ; manger l'herbe
+  [ if (pcolor = green)                   ; si le mouton trouve de l'herbe
+    [ set pcolor black                    ; manger l'herbe
       manger 2
     ]
-    [ if (pcolor = pink)              ; si le mouton trouve une fleur
-      [ manger 50                     ; manger la fleur
-      ]
+    let bourgeon one-of fleurs-here
+    if (bourgeon != nobody)               ; si le mouton trouve une fleur
+    [ ask bourgeon [die]
+      manger 50                           ; manger la fleur
     ]
-    let partner one-of other moutons-here    ; choisir un partenaire
-    if (partner != nobody)            ; si un partenaire a été trouvé
-    [ if (random 100 < 50)            ; lancer le dé
+    let partner one-of other moutons-here ; choisir un partenaire
+    if (partner != nobody)                ; si un partenaire a été trouvé
+    [ if (random 100 < 50)                ; lancer le dé
       [ if ((energie > 70) and ([energie] of partner > 70))
-        [ hatch 1 [init_mouton]       ; créer un nouveau mouton
+        [ hatch 1 [init_mouton]           ; créer un nouveau mouton
           set energie (energie - 20)
           ask partner [set energie (energie - 20)]
         ]
@@ -94,21 +99,21 @@ end
 
 to vie_de_loups
   avancer_loups
-  ifelse (energie <= 0)               ; si le loup n'a plus d'énergie
-  [ mourir                            ; mourir
+  ifelse (energie <= 0)                   ; si le loup n'a plus d'énergie
+  [ mourir                                ; mourir
   ]
-  [ if (energie < 75)                 ; si le mouton a faim
-    [ let proie one-of moutons-here   ; prendre un des moutons qui se trouve à la même place
-      if (proie != nobody)            ; verifier qu'il y avait un mouton à la même place
-      [ ask proie [mourir]            ; tuer le mouton
-        manger 50                     ; manger le mouton
+  [ if (energie < 75)                     ; si le mouton a faim
+    [ let proie one-of moutons-here       ; prendre un des moutons qui se trouve à la même place
+      if (proie != nobody)                ; verifier qu'il y avait un mouton à la même place
+      [ ask proie [mourir]                ; tuer le mouton
+        manger 50                         ; manger le mouton
       ]
     ]
-    let partner one-of other loups-here    ; choisir un partenaire
-    if (partner != nobody)            ; si un partenaire a été trouvé
-    [ if (random 100 < 50)            ; lancer le dé
+    let partner one-of other loups-here   ; choisir un partenaire
+    if (partner != nobody)                ; si un partenaire a été trouvé
+    [ if (random 100 < 50)                ; lancer le dé
       [ if ((energie > 70) and ([energie] of partner > 70))
-        [ hatch 1 [init_loup]         ; créer un nouveau loup
+        [ hatch 1 [init_loup]             ; créer un nouveau loup
           set energie (energie - 20)
           ask partner [set energie (energie - 20)]
         ]
@@ -118,14 +123,14 @@ to vie_de_loups
 end
 
 to pousser
-  if ((ticks mod 200) = 0)             ; executer toute les 200 iterations
-  [ if ((random 100) < 2)              ; lancer le dé
-    [ set pcolor green                 ; faire pousser l'herbe
+  if ((ticks mod 200) = 0)                 ; executer toute les 200 iterations
+  [ if ((random 100) < 2)                  ; lancer le dé
+    [ set pcolor green                     ; faire pousser l'herbe
     ]
   ]
-  if (ticks = tick_fleur)              ; c'est le moment de faire pousser la fleur
-  [ set pcolor pink
-    set tick_fleur -1                  ; enlever la marque
+  if (ticks = tick_fleur)                  ; c'est le moment de faire pousser la fleur
+  [ sprout-fleurs 1 [init_fleur]           ; créer une fleur
+    set tick_fleur -1                      ; enlever la marque
   ]
 end
 
