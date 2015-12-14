@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><title>Magiciel 2015</title>
+    <style type="text/css">
+    body { 
+        margin:40px auto;
+        max-width:800px;
+        line-height:1.6;
+        font-size:18px;
+        color:#444;
+        padding:0 10px
+     }
+     h1,h2,h3 {
+        line-height:1.2
+     }
+    </style>
+</head>
+<body alink="#ff0000" bgcolor="#ffffff" link="#0000ef" text="#000000" vlink="#52188c">
+<blockquote>
+  <center>
+  <hr width="100%">
+  </center>
+  <p></p>
+  <center>
+  <table cols="1" nosave="" bgcolor="#ffffcc" border="2" width="60%">
+    <tbody>
+    <tr nosave="">
+      <td nosave="">
+        <center><b><font size="+3">Dissémination d'une maladie en Netlogo</font></b> 
+
+        <p><b><font size="+2">Laboratoire V</font></b></p></center></td></tr></tbody></table></center><br>
+  <div align="right"><p>Hector Satizabal<br />Julien Rebetez</p></div>
+  <hr width="100%">
+ 
+  <h2>I. Objectif</h2>
+  <p> Dans ce laboratire vous devez programmer deux populations de tortues simulant la dissémination d'une maladie: des tortues vertes qui sont saines, et des tortues rouges qui sont aussi saines mais qui portent un virus mortel. La maladie se transmet par contacte entre le tortues rouges et les tortues vertes. Les tortues vertes qui developpent la maladie deviennent jaunes. Elles peuvent laisser le virus dans l'environnement et meurent après un certain temps.
+  </p>
+  
+  <h2>II. Critères d'évaluation</h2>
+  <p>Envoyez le fichier <b>.nlogo</b> (pas de fichier texte ou de document word !) par email à <a href="mailto:julien.rebetez@heig-vd.ch">julien.rebetez@heig-vd.ch</a>.</p>
+  <ul>
+    <li>Pas d'erreur de syntaxe</li>
+    <li>Utilisation de bouton(s) pour initialiser l'environnement et lancer la simulation</li>
+    <li>Utilisation d'une boucle <b>while</b> pour la boucle principale</li>
+    <li>Respecter les indications ci-dessous</li>
+  </ul>
+  
+  <h2>III. Exercice</h2>
+  <ol>
+    <li> Créer un slider pour définir la taille de la population de tortues de chaque couleur. Le slider doit créer la variable globale "nombre_de_tortues" que vous devez utiliser ensuite
+    <p><img src="slider.png" height="221" width="638"></p>
+    <li> Programmer une procedure pour créer une population de taille "nombre_de_tortues", coloriez-les en rouge et placez-les dans la partie supérieure gauche de l'environnement
+    <p><img src="init_rouges.png" height="720" width="691"></p>
+    <li> Programmer une procedure pour créer une population de taille "nombre_de_tortues", coloriez-les en vert et placez-les dans la partie inférieure droite de l'environnement
+    <p><img src="init_vertes.png" height="720" width="691"></p>
+    <li> Créer un plot qui montre l'évolution des deux populations
+    <p><img src="plot.png" height="450" width="618"></p>
+    <li> Créer un bouton pour initiliser l'environnement (effacer tout, placer les deux types de tortues)
+    <p><img src="init.png" height="910" width="691"></p>
+    <li> Programmer les tortues de la manière suivante
+    <ul> 
+        <li> Les tortues doivent avancer de manière aléatoire (pas de sauts, utilisez fd 1).
+        <li> Dès qu'une tortue rouge (portant la maladie) se trouve à la même place qu'une tortue verte, cette dernière devient jaune (elle développe la maladie)
+        <li> Les tortues jaunes continuent à bouger aléatoirement et elles changent la couleur de l'environnement en jaune avec une probabilité de 10% (elle laissent le virus sur l'environnement)
+        <li> Si une tortue verte passe par un patch jaune elle meurt et le patch jaune redevient noir (le virus est mortel pour les tortues vertes)
+        <li> Si deux tortues vertes se retrouvent dans un même patch qui n'est pas jaune, elles donnent naissance à une nouvelle tortue verte qui est placée à une position aléatoire de l'environnement
+    </ul>
+    <li> Programmer également un bouton pour lancer la simulation
+  </ol>
+
+
+  <hr width="100%">
+  
+HEIG-VD, 2015 
+</blockquote></body></html>
