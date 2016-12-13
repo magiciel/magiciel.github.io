@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><title>Magiciel 2015</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"><title>Magiciel 2015 - Labo IV</title>
     <style type="text/css">
     body { 
         margin:40px auto;
@@ -35,7 +35,8 @@
   <hr width="100%">
  
   <h2>I. Critères d'évaluation</h2>
-  <p>Envoyez le fichier <b>.nlogo</b> (pas de fichier texte ou de document word !) par email à <a href="mailto:julien.rebetez@heig-vd.ch">julien.rebetez@heig-vd.ch</a>.</p>
+  <p>Une fois le laboratoire terminé, envoyez le fichier <b>.nlogo</b> (pas de fichier texte ou de document word !) par email à <a href="mailto:jeremie.despraz@heig-vd.ch">jeremie.despraz@heig-vd.ch</a>.</p>
+  <h4>Objectifs:</h4>
   <ul>
     <li>Pas d'erreur de syntaxe</li>
     <li>Une procédure pour initialiser l'environnement (carrés + fourmis)</li>
@@ -45,26 +46,26 @@
     <li>Utilisation d'une variable d'état pour mémoriser qu'une fourmi est chargée</li>
     <li>Déplacement aléatoire (pas de sauts, pas de cercles, utiliser <b>fd 1</b>)</li>
     <li>Utilisation de bouton(s) pour initialiser l'environnement et lancer la simulation</li>
-    <li>Respecter les indications ci-dessous</li>
+    <li>Respectez les indications ci-dessous</li>
   </ul>
   
   <h2>II. Exercice</h2>
   <ol>
     <li> Créer une population de 20 fourmis
     <p><img src="ants20.png" height="315" width="315"></p>
-    <li> <b>Nourriture</b>: Écrire une procédure pour que une des fourmis dessine un carré jaune de 5x5 patches à un endroit aléatoire de l'environnement
+    <li> <b>Nourriture</b>: Écrire une procédure pour qu'une des fourmis dessine un carré jaune de 5x5 patches à un endroit aléatoire de l'environnement
     <p><img src="ants20_food_clip.png" height="250" width="270"></p>
-    <li> <b>Nid</b>: Écrire une procédure pour que une des fourmis dessine un carré bleu de 3x3 patches à un endroit aléatoire de l'environnement
+    <li> <b>Nid</b>: Écrire une procédure pour qu'une des fourmis dessine un carré bleu de 3x3 patches à un endroit aléatoire de l'environnement
     <p><img src="ants20_food_nest_clip.png" height="250" width="270"></p>
     <li> Écrire un programme qui fait bouger aléatoirement une vingtaine de fourmis à la recherche de nourriture (patches jaunes):
       <ul>
         <li> Lorsqu'une fourmi trouve de la nourriture, elle changera la couleur du patch en noir pour indiquer qu'elle l'a pris
         <p><img src="ants20_load_1_clip.png" height="250" width="270"></p>
-        <li> Si la fourmi porte de la nourriture, elle changera ça couleur pour montrer qu'elle est chargée
+        <li> Si la fourmi porte de la nourriture, elle changera sa couleur en rouge pour montrer qu'elle est chargée
         <p><img src="ants20_load_2_clip.png" height="250" width="270"></p>
-        <li> Une fourmi qui porte de la nourriture, ne peut pas porter un deuxième patch et elle devra "chercher" le nid pour y l'empiler
+        <li> Une fourmi qui porte de la nourriture ne peut pas porter un deuxième patch, elle devra "chercher" le nid pour y déposer son patch de nourriture
         <p><img src="ants20_transport_clip.png" height="250" width="270"></p>
-        <li> Pour indiquer que dans le nid il y a déjà plusieurs patches jaunes empilés, on changera la couleur du patch du nid
+        <li> Lorsqu'un patch jaune est empilé dans le nid, on changera la couleur du patch du nid correspondant (incrémentation par pas de 0.1)
         <p><img src="ants20_unload_clip.png" height="250" width="270"></p>
         <li> Dès que tous les patches jaunes sont dans le nid, la simulation s'arrête
       </ul>
@@ -73,5 +74,5 @@
 
   <hr width="100%">
   
-HEIG-VD, 2015 
+HEIG-VD, 2016 
 </blockquote></body></html>
