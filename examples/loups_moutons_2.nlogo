@@ -73,7 +73,7 @@ to vie_de_loups
   ifelse (energie <= 0)               ; si le loup n'a plus d'énergie
   [ die                               ; mourir
   ]
-  [ if (energie < 75)                 ; si le mouton a faim
+  [ if (energie < 75)                 ; si le loup a faim
     [ let proie one-of moutons-here   ; prendre un des moutons qui se trouve à la même place
       if (proie != nobody)            ; verifier qu'il y avait un mouton à la même place
       [ ask proie [mourir]            ; tuer le mouton
