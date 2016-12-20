@@ -35,7 +35,7 @@
   <hr width="100%">
  
   <h2>I. Objectif</h2>
-  <p> Dans ce laboratire vous devez programmer deux populations de tortues simulant la dissémination d'une maladie: des tortues vertes qui sont saines, et des tortues rouges qui sont aussi saines mais qui portent un virus mortel. La maladie se transmet par contacte entre le tortues rouges et les tortues vertes. Les tortues vertes qui developpent la maladie deviennent jaunes. Elles peuvent laisser le virus dans l'environnement et meurent après un certain temps.
+  <p> Dans ce laboratoire vous devez programmer deux populations de tortues simulant la dissémination d'une maladie: des tortues vertes qui sont saines, et des tortues rouges qui sont aussi saines mais qui portent un virus mortel. La maladie se transmet par contact entre les tortues rouges et les tortues vertes. Les tortues vertes qui developpent la maladie deviennent jaunes. Elles disséminent le virus dans l'environnement et meurent après un certain temps.
   </p>
   
   <h2>II. Critères d'évaluation</h2>
@@ -59,7 +59,7 @@
     <p><img src="init_vertes.png" height="720" width="691"></p>
     <li> Créer un plot qui montre l'évolution des deux populations
     <p><img src="plot.png" height="450" width="618"></p>
-    <li> Créer un bouton pour initiliser l'environnement (effacer tout, placer les deux types de tortues)
+    <li> Créer un bouton pour initialiser l'environnement (effacer tout et placer les deux types de tortues)
     <p><img src="init.png" height="910" width="691"></p>
   </ol>
 
@@ -67,7 +67,7 @@
   <ol>
     <li> Programmer les tortues de la manière suivante
     <ul> 
-        <li> Les tortues doivent avancer de manière aléatoire (pas de sauts, utilisez fd 1)
+        <li> Les tortues doivent avancer de manière aléatoire (pas de sauts ni de cercles, utilisez fd 1)
         <li> Dès qu'une tortue rouge (portant la maladie) se trouve à la même place qu'une tortue verte, cette dernière devient jaune (elle développe la maladie)
         <li> Les tortues jaunes continuent à bouger aléatoirement et elles changent la couleur de l'environnement en jaune avec une probabilité de 5% (elles contaminent l'environnement avec le virus)
         <li> Si une tortue passe par un patch jaune elle mange le patch (le patch redevient noir)
@@ -81,15 +81,15 @@
 
   <h3>Troisième partie</h3>
   <ol>
-    <li> Modifier le code pour que des patches bleu répresentant un médicament miraculeux aparaisent toute les 10 iterations avec une probabilité de 1%
-    <li> Si une tortue pase par un patch bleu elle le mange
+    <li> Modifier le code pour que des patches bleus répresentant un médicament miraculeux aparaisent chaque 10 iterations avec une probabilité de 1%
+    <li> Si une tortue pase par un patch bleu, elle le mange
     <li> Si une tortue malade (jaune) mange le médicament elle guérie et redevient une tortue saine (verte)
   </ol>
 
   <h3>Quatrième partie</h3>
   <ol>
     <li> Tester le code avec plusiers tailles de population. Par exemple avec 10, 20, 30, 40 et 50 tortues
-    <li> Jusqu'à quelle taille de population obtient-on une sur-population des tortues malades?
+    <li> Jusqu'à quelle taille de population obtient-on une surpopulation de tortues malades?
     <p><img src="surpopulation.png" height="152" width="619"></p>
     <li> À partir de quelle taille de population obtient-on une extinction des tortues saines?
     <p><img src="extinction.png" height="152" width="619"></p>
