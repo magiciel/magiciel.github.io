@@ -46,14 +46,15 @@ propre logiciel <i>stego</i> de stéganographie en langage C, pour cette manip.<
   Commencez par autoriser l'exécution de <i>stego</i> :<br />
   </p><pre>        chmod +x stego</pre>
   <p>
-  Pour encoder un fichier dans une image :<br>
-  </p><pre>        ./stego -e &lt;fichier a encoder&gt; &lt;image.bmp&gt; &lt;fichier bitmap de sortie&gt;
-</pre>
 <p>
   Pour decoder une image :<br>
-  </p><pre>        ./stego -d &lt;image.bmp&gt; &lt;fichier de sortie&gt;
+  </p><pre>        ./stego -d "image.bmp" "fichier de sortie"
 </pre>
 <p>
+  Pour encoder un fichier dans une image :<br>
+  </p><pre>        ./stego -e "fichier a encoder" "image.bmp" "fichier bitmap de sortie"
+</pre>
+
 Vous pouvez utiliser une image simple comme <a href="test.bmp">celle ci</a> ou n'importe quelle image BMP 24-bits. Le fichier à encoder peut être une autre image, un fichier texte, etc.</p><p>
 Une image bitmap BMP 24bits commence avec un entête ou "header" et 
 ensuite, on trouve la couleur des pixels de l'image. L'entête commence 
