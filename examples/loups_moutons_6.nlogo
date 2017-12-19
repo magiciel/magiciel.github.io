@@ -55,46 +55,51 @@ to tourner_a_droite_max [angle max_angle]
 end
 
 to se_orienter_comme_des_moutons
-  let copains other moutons in-radius 10                                 ; trouver les moutons qui sont proches
-  if (any? copains)                                                      ; si il y a des moutons en proximité
-  [ let copain_le_plus_proche min-one-of copains [distance myself]       ; trouver le mouton le plus proche
-    ifelse (distance copain_le_plus_proche < 1)                          ; regarder si on est trop proche
-    [ let a subtract-headings heading [heading] of copain_le_plus_proche ; s'eloigner
-      tourner_a_droite_max a 1
+  let copains other moutons in-radius 5                                   ; trouver les moutons les plus proches
+  if (any? copains)                                                       ; si il y a des moutons en proximité
+  [ let copain_le_plus_proche min-one-of copains [distance myself]        ; trouver le mouton le plus proche
+    ifelse (distance copain_le_plus_proche < 1)                           ; regarder si on est trop proche
+    [ let x [xcor] of copain_le_plus_proche                               
+      let y [ycor] of copain_le_plus_proche
+      if ((xcor != x) and (ycor != y))
+      [ let a subtract-headings heading (towardsxy x y)
+        tourner_a_droite_max a 5                                          ; s'eloigner
+      ]
     ]
-    [ let x sum [dx] of copains                                          ; s'orienter comme les autres
-      let y sum [dy] of copains
-      if ((x != 0) or (y != 0))
-      [ let a subtract-headings (atan x y) heading
-        tourner_a_droite_max a 15
+    [                                                                     ; si on n'est pas trop proche
+      let x (xcor + (mean [dx] of copains))                               ; trouver l'orientation moyenne du groupe
+      let y (ycor + (mean [dy] of copains))
+      if ((xcor != x) and (ycor != y))
+      [ let a subtract-headings (towardsxy x y) heading
+        tourner_a_droite_max a 15                                         ; s'orienter comme les autres
       ]
       
-      set x mean [sin (towards myself + 180)] of copains                 ; s'orienter vers le centre du groupe
-      set y mean [cos (towards myself + 180)] of copains
-      if ((x != 0) or (y != 0))
-      [ let a subtract-headings (atan x y) heading
-        tourner_a_droite_max a 10
+      set x mean [xcor] of copains                                        ; trouver le centre du groupe
+      set y mean [ycor] of copains
+      if ((xcor != x) and (ycor != y))
+      [ let a subtract-headings (towardsxy x y) heading
+        tourner_a_droite_max a 10                                         ; s'orienter vers le centre du groupe
       ]
     ]
   ]
-  rt (random 10) - 5                                                     ; tourner un peu au hasard
+  rt (random 10) - 5                      ; tourner un peu au hasard
 end
 
 to se_orienter_pour_eviter_les_loups
   let mechants loups in-radius 4                        ; trouver les loups les plus proches
   if (any? mechants)                                    ; si il y a des mechants à proximité
-  [ let x mean [sin (towards myself + 180)] of mechants
-    let y mean [cos (towards myself + 180)] of mechants
-    if ((x != 0) or (y != 0))
-    [ rt subtract-headings heading (atan x y)
+  [ let x mean [xcor] of mechants                       ; trouver le centre du groupe
+    let y mean [ycor] of mechants
+    if ((xcor != x) and (ycor != y))
+    [ let a subtract-headings heading (towardsxy x y)
+      tourner_a_droite_max a 30                         ; s'eloigner du centre du groupe
     ]
   ]
 end
 
 to avancer_moutons
-  ifelse (any? loups in-radius 4)
-  [ se_orienter_pour_eviter_les_loups ]
-  [ se_orienter_comme_des_moutons ]
+  se_orienter_comme_des_moutons
+  se_orienter_pour_eviter_les_loups
   fd 1
   set energie (energie - 0.1)             ; dépenser de l'énergie
 end
