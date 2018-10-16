@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><title>Magiciel 2018 - Introduction à Netlogo</title>
+    <style type="text/css">
+    body { 
+        margin:40px auto;
+        max-width:800px;
+        line-height:1.6;
+        font-size:18px;
+        color:#444;
+        padding:0 10px
+    }
+    h1,h2,h3 {
+        line-height:1.2
+    }
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    </style>
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<body alink="#ff0000" bgcolor="#ffffff" link="#0000ef" text="#000000" vlink="#52188c">
+<blockquote>
+  <center>
+  <hr width="100%">
+  </center>
+  <p></p>
+  <center>
+  <table cols="1" nosave="" bgcolor="#ffffcc" border="2" width="60%">
+    <tbody>
+    <tr nosave="">
+      <td nosave="">
+        <center><b><font size="+3">Introduction à Netlogo</font></b> 
+        </center></td></tr></tbody></table></center><br>
+  <div align="right">Hector Satizabal</div>
+  <div align="right">Jérémie Despraz</div>
+  <hr width="100%">
+
+
+  <h2>I. Critères d'évaluation</h2>
+  <p>Une fois le laboratoire terminé, envoyez le fichier <b>.nlogo</b> au format <pre>Labo1-&lt;nom1&gt;-&lt;nom2&gt;.nlogo</pre> par email à <a href="mailto:jeremie.despraz@heig-vd.ch">jeremie.despraz@heig-vd.ch</a> (pas de fichier texte ou de document word !).</p>
+  <h4>Objectifs:</h4>
+  <ul>
+    <li>Pas d'erreur de syntaxe</li>
+    <li>Créer les variables nécessaires pour répondre aux questions</li>
+    <li>Respectez les indications dans chaque question</li>
+  </ul>
+
+  <h2>II. Exercices</h2>
+  <ol>
+  <li>Créer un bouton pour effacer completement l'environnement</li>
+
+  <li>Créer un bouton pour créer une tortue</li>
+
+  <li>Créer des procédures avec le but de dessiner 4 polygones, de côté 10, en commençant par un triangle, suivi d'un carré, un pentagone et un hexagone.</li>
+  
+  <center><table>
+  <tr>
+    <td><img src="view_5.png" height="250" width="250" class="center" border="1"></td>
+    <td><pre>
+        to dessiner_polygone __
+            pd
+            repeat __
+            [
+                fd 10
+                rt __
+            ]
+            pu
+        end
+        
+        to dessiner
+            _____________
+            repeat 4
+            [
+                dessiner_polygone __
+                _____________
+            ]
+        end
+    </pre></td>
+  </tr>
+  </table></center>
+  
+  <li>Écrire une procédure qui fait qu'une tortue de Netlogo dessine la fonction suivante :</li>
+$$ b = \frac{1}{1 + e^{-a}}~~~~~~pour~~~-5 < a < 5 $$
+
+Il s'agit de la fonction Sigmoïde ou fonction logistique. La valeur de b est toujours
+positive et plus petite que 1, (voir sa forme dans la figure ci­dessous) :
+
+  <center><table>
+  <tr>
+    <td><img src="view_4.png" height="250" width="250" class="center" border="1"></td>
+    <td><pre>
+        to logistique
+            _____________
+            _____________
+            repeat __
+            [
+                _____________
+                _____________
+                _____________
+                _____________
+            ]
+        end
+    </pre></td>
+  </tr>
+  </table></center>
+
+  <li>Créer une procédure qui fait qu'une tortue de Netlogo dessine la figure ci­-dessous. Utiliser notamment l'instruction REPEAT.</li>
+  <center><table>
+  <tr>
+    <td><img src="view_2.png" height="250" width="250" class="center" border="1"></td>
+    <td><pre>
+        to spirale
+            _____________
+            repeat 9
+            [
+                repeat __
+                [
+                    _____________
+                    _____________
+                ]
+                _____________
+                _____________
+            ]
+        end
+    </pre></td>
+  </tr>
+  </table></center>
+
+  <li>Créer une procédure qui fait qu'une tortue de Netlogo dessine la figure ci­-dessous. Utiliser notamment REPEAT 6 pour dessiner l'hexagone et REPEAT 2 pour le faire deux fois.</li>
+  <center><table>
+  <tr>
+    <td><img src="view_1.png" height="250" width="250" class="center" border="1"></td>
+    <td><pre>
+        to double_hexagone
+            _____________
+            repeat 2
+            [
+                repeat 6
+                [
+                    _____________
+                    .
+                    .
+                    .
+                    _____________
+                ]
+                _____________
+            ]
+        end
+    </pre></td>
+  </tr>
+  </table></center>
+
+  <li>Créer une procédure permetant de positionner aléatoirement 20 tortues dans la zone de l'environnement delimitée par -5 &lt; x &lt; 5 et -5 &lt; y &lt; 5. Utiliser notamment l'instruction SETXY.</li>
+
+  
+
+  <hr width="100%">
+HEIG-VD, 2018
+</blockquote></body></html>
